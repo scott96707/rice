@@ -1,0 +1,5 @@
+# CSG Specific alias
+alias servers='sh ~/bin/servers.sh'
+
+# User specific aliases and functions
+alias l='ls -ahl'

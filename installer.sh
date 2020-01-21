@@ -30,9 +30,9 @@ pre_install() {
 		log "Enabling Fedora community repos..."     
 		try dnf install dnf-plugins-core > "$debug"
 
-		log "Enabling alacritty community repo..."     
-		try dnf copr enable -y pschyska/alacritty > "$debug"
-		try dng install alacritty
+	#	log "Enabling alacritty community repo..."     
+	#	try dnf copr enable -y pschyska/alacritty > "$debug"
+	#	try dng install alacritty
 }
 
 install_package() {

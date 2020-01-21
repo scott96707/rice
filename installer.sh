@@ -43,7 +43,7 @@ install_package() {
 }
 
 install_packages() {
-	[ -f "$pkgfile" ] && cp "$pkgfile" /tmp/pkgs) || (log "Downloading package list..." && curl -Ls "$pkgfile" > /tmp/pkgs)
+	[ -f "$pkgfile" ] && (cp "$pkgfile" /tmp/pkgs) || (log "Downloading package list..." && curl -Ls "$pkgfile" > /tmp/pkgs)
 	
     packages=$(sed '/^$/d' /tmp/pkgs | sed '/^#/d')
     while IFS='	' read -r flag program comment; do

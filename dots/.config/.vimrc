@@ -1,4 +1,3 @@
-colorscheme gruvbox     " Sets color scheme to Dracula
 colo lucid
 set clipboard+=unnamedplus   " Sets clipboard to use system's board
 colo gruvbox
@@ -18,7 +17,6 @@ set showmatch           " Shows matching character for parenthesis-like characte
 set backup              " Keeps an automatic backup of this file. Same name as orig with '~' added
 map <F2> :NERDTreeToggle<CR> 
 " ^^ Set NerdTree to F2 key
-let g:deoplete#enable_at_startup = 1 " Enable deoplete autocomplete @ start
 
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS " Enable autocomplete for CSS
 
@@ -34,23 +32,12 @@ if !exists('g:airline_symbols')  "air-line setup
 endif
 
 " Vim-plug setup
-set rtp+=~/.local/share/nvim/site/autoload/plug.vim
-call plug#begin('~/.config/nvim/bundle')
 
 " List of Plugins declared here
 Plug 'scrooloose/nerdtree'  
 Plug 'beautify-web/js-beautify'
 Plug 'airblade/vim-gitgutter'
 Plug 'ap/vim-css-color' " Colors rgb, hex values in-line
-" Begin deoplete install (for autocomplete support)
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-let g:deoplete#enable_at_startup = 1
-" End deoplete install
 " End Vim-plug setup
 call plug#end()
+colorscheme dracula" Sets color scheme to Dracula

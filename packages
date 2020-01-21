@@ -1,9 +1,19 @@
 # Tools
-	git
-	stow
+		git
+		stow
+		go
 
 # Editor
-	vim
+		vim
 
-# GUI and Utilies
-	i3
+# Desktop Environment and Utilities
+		i3
+
+# File Management
+G		github.com/gokcehan/lf	extensive terminal file manager
+		fd-find
+		ripgrep
+		bat
+		fzf
+		unrar
+		unzip

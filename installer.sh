@@ -37,11 +37,15 @@ pre_install() {
 
 install_package() {
 	case $2 in
-	*)
-		log "Installing $1 - "
-		try dnf install -y "$1" > "$debug"
-		;;
-	esac
+		G)
+				log "Installing go package $1..."
+				try go get -u "$1" > "$debug"
+				;;
+		*)
+				log "Installing $1 - "
+				try dnf install -y "$1" > "$debug"
+				;;
+		esac
 }
 
 install_packages() {

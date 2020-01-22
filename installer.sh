@@ -64,10 +64,22 @@ install_dots() {
 	log "Downloading dot files"
 	git clone "$dotrepo" $USER_HOME/.config/rice > "$debug" || log "Dots have already been cloned"
 	(cd $USER_HOME/.config/rice && stow --target="$HOME" --ignore='gitignore' dots)
+}
 
+install_vimplug() {
 	log "Downloading VimPlug"
 	curl -fLo $USER_HOME/.vim/autoload/plug.vim --create-dirs \
 	    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+}
+
+# Adding aliases to the user's .bashrc
+source_aliases() {
+	if [ grep -Fxq "source ~/.config/aliases" $USER_HOME/.bashrc ];
+	then
+		return 1
+	else
+		echo "source ~/.config/aliases" >> $USER_HOME/.bashrc
+	fi
 }
 
 cleanup() {
@@ -88,6 +100,7 @@ main() {
 	pre_install
 	install_packages
 	install_dots
+	install_vimplug
 }
 
 main

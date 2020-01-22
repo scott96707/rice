@@ -6,7 +6,7 @@ log() {
 }
 
 yon() {
-	log "$1" "$2" "!!" >&2
+	log "$1" "$2" "!>" >&2
 	exit 1
 }
 
@@ -71,9 +71,9 @@ cleanup() {
 }
 
 main() {
-	dotrepo=${RICE_REPO:-"https://github.com/scott96707/rice.git"}
+	dotrepo="https://github.com/scott96707/rice.git"
 
-	pkgfile=${Rice_PKG:-"https://github.com/scott96707/rice/raw/master/packages"}
+	pkgfile="https://github.com/scott96707/rice/raw/master/packages"
 
 	if [ "$RICE_DEBUG" == 1 ]; then debug="/dev/stdout"; else debug="/dev/null"; fi
 

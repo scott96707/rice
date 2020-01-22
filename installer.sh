@@ -62,8 +62,12 @@ EOF
 
 install_dots() {
 	log "Downloading dot files"
-	git clone "$dotrepo" $HOME/.config/rice > "$debug" || log "Dots have already been cloned"
-	(cd ~/.config/rice && stow --target="$HOME" --ignore='gitignore' dots)
+	git clone "$dotrepo" $USER_HOME/.config/rice > "$debug" || log "Dots have already been cloned"
+	(cd $USER_HOME/.config/rice && stow --target="$HOME" --ignore='gitignore' dots)
+
+	log "Downloading VimPlug"
+	curl -fLo $USER_HOME/.vim/autoload/plug.vim --create-dirs \
+	    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 }
 
 cleanup() {
@@ -75,7 +79,9 @@ main() {
 
 	pkgfile="https://github.com/scott96707/rice/raw/master/packages"
 
-	if [ "$RICE_DEBUG" == 1 ]; then debug="~/bin/stdout"; else debug="/dev/null"; fi
+	USER_HOME="/home/$SUDO_USER"
+
+	if [ "$RICE_DEBUG" == 1 ]; then debug="$USER_HOME/bin/stdout"; else debug="/dev/null"; fi
 
 	trap cleanup INT
 

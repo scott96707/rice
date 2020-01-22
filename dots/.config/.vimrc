@@ -1,6 +1,4 @@
-colo lucid
 set clipboard+=unnamedplus   " Sets clipboard to use system's board
-colo gruvbox
 set mouse=v             " Middle-click paste with mouse
 set ignorecase          " Case insensitive matching
 set expandtab           " Converts tabs to white space 
@@ -32,12 +30,23 @@ if !exists('g:airline_symbols')  "air-line setup
 endif
 
 " Vim-plug setup
+call plug#begin('~/.vim/plugged')
 
 " List of Plugins declared here
 Plug 'scrooloose/nerdtree'  
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'mattn/emmet-vim'
 Plug 'beautify-web/js-beautify'
 Plug 'airblade/vim-gitgutter'
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'hail2u/vim-css3-syntax'
 Plug 'ap/vim-css-color' " Colors rgb, hex values in-line
+Plug 'posva/vim-vue' "Add Vue.JS syntax
+Plug 'mxw/vim-jsx' "Add JSX syntax
+Plug 'pangloss/vim-javascript' "JS syntax and indention support
+Plug 'isRuslan/vim-es6' " Adds ES6 syntax support
 " End Vim-plug setup
 call plug#end()
+
 colorscheme dracula" Sets color scheme to Dracula

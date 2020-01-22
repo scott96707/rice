@@ -75,7 +75,7 @@ main() {
 
 	pkgfile="https://github.com/scott96707/rice/raw/master/packages"
 
-	if [ "$RICE_DEBUG" == 1 ]; then debug="/dev/stdout"; else debug="/dev/null"; fi
+	if [ "$RICE_DEBUG" == 1 ]; then debug="~/bin/stdout"; else debug="/dev/null"; fi
 
 	trap cleanup INT
 

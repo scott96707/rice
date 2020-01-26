@@ -20,6 +20,22 @@ trim_string(){
 	printf '%s\n' "$trim"
 }
 
+# Adding aliases and environment variable to the user's .bashrc
+source_variables() {
+	if [ grep -x "source ~/.config/aliases" $USER_HOME/.bashrc ];
+	then
+		return 1
+	else
+		echo "source ~/.config/aliases" >> $USER_HOME/.bashrc
+	fi
+	if [ grep -x "source ~/.profile" $USER_HOME/.bashrc ];
+	then
+		return 1
+	else
+		echo "source ~/.profile" >> $USER_HOME/.bashrc
+	fi
+}
+
 pre_install() {
 	log "Installing RPM Fusion"
 	try dnf install -y \
@@ -33,6 +49,8 @@ pre_install() {
 	# log "Enabling alacritty community repo..."     
 	# try dnf copr enable -y pschyska/alacritty > "$debug"
 	# try dng install alacritty
+    log "Adding source variables and aliases" 
+	try source_variables
 }
 
 install_package() {
@@ -60,28 +78,12 @@ $packages
 EOF
 }
 
-# Adding aliases and environment variable to the user's .bashrc
-source_variables() {
-	if [ grep -Fxq "source ~/.config/aliases" $USER_HOME/.bashrc ];
-	then
-		return 1
-	else
-		echo "source ~/.config/aliases" >> $USER_HOME/.bashrc
-	fi
-	if [ grep -Fxq "source ~/.profile" $USER_HOME/.bashrc ];
-	then
-		return 1
-	else
-		echo "source ~/.profile" >> $USER_HOME/.bashrc
-	fi
-}
+
 install_dots() {
 	log "Downloading dot files"
 	git clone "$dotrepo" $USER_HOME/.config/rice > "$debug" || log "Dots have already been cloned"
 	log "Stowing dot files"
-	(cd $USER_HOME/.config/rice && stow -R --target="$HOME" --ignore='gitignore' dots)
-    log "Adding source variables and aliases" 
-	try source_variables
+	(cd $USER_HOME/.config/rice && stow --target="$HOME" --ignore='gitignore' dots)
 }
 
 install_vimplug() {
@@ -104,8 +106,8 @@ main() {
 	trap cleanup INT
 
 	pre_install
-	install_dots
 	install_packages
+	install_dots
 	install_vimplug
 }
 

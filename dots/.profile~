@@ -7,4 +7,4 @@ export MYVIMRC=~/.config/.vimrc
 # Go
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
-export PS1="[\u-\w]\\$\[$(tput sgr0)\]"
+

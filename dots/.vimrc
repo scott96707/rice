@@ -7,6 +7,7 @@ set tabstop=4           " Number of columns occupied by a tab
 set softtabstop=4       " Number of spaces in tab when editing
 set shiftwidth=4        " When indenting with '>', use 2 spaces
 set number              " Display line numbers on left margin
+set relativenumber      " Display relative line numbers
 syntax enable           " Enable syntax processing. Pairs with the 'set hlsearch' option
 set cursorline          " Highlight current line
 set hlsearch            " Highlights search matches
@@ -30,6 +31,11 @@ if !exists('g:airline_symbols')  "air-line setup
 endif
 
 " Vim-plug setup
+"if empty(glob('~/.vim/autoload/plug.vim'))
+"  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+"    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+"endif
 call plug#begin('~/.vim/plugged')
 
 " List of Plugins declared here

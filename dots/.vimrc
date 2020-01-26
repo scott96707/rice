@@ -13,7 +13,7 @@ set cursorline          " Highlight current line
 set hlsearch            " Highlights search matches
 set wildmenu            " Visual autocomplete for command menu, use Tab to display commands
 set showmatch           " Shows matching character for parenthesis-like characters
-set backup              " Keeps an automatic backup of this file. Same name as orig with '~' added
+set nobackup            " Stops backup files. Same name as orig with '~' added
 map <F2> :NERDTreeToggle<CR> 
 " ^^ Set NerdTree to F2 key
 
@@ -30,12 +30,12 @@ if !exists('g:airline_symbols')  "air-line setup
         let g:airline_symbols={}
 endif
 
-" Vim-plug setup
-"if empty(glob('~/.vim/autoload/plug.vim'))
-"  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-"    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-"  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-"endif
+ Vim-plug setup
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 call plug#begin('~/.vim/plugged')
 
 " List of Plugins declared here

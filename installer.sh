@@ -125,6 +125,10 @@ install_vimplug() {
     ln -fs $USER_HOME/.vim ~/
 }
 
+install_vscode_extensions() {
+    try code --install-extension Shan.code-settings-sync
+}
+
 cleanup() {
 	yon "Aborting rice"
 }
@@ -148,6 +152,7 @@ EOF'
 	install_packages
 	install_dots
 	install_vimplug
+    install_vscode_extension
 }
 
 main

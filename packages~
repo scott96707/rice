@@ -8,7 +8,7 @@
 
 # Desktop Environment and Utilities
 	i3      # Keyboard-driven window manager
-	feh     # Add wallpapers to i3 add line to .profile to customize
+	feh     # Add wallpapers to i3
 
 # File Management
 G	github.com/gokcehan/lf      # extensive terminal file manager

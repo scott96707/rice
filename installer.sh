@@ -92,6 +92,8 @@ install_vimplug() {
 	    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     # On creation, autoload is owned by root:root. This stops VimPlug from working
     chown $SUDO_USER:$SUDO_USER $USER_HOME/.vim/autoload
+    # Link vim file with autoload and VimPlug to root user
+    ln -s $USER_HOME/.vim ~/
 }
 
 cleanup() {

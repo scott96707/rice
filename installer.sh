@@ -11,7 +11,7 @@ yon() {
 }
 
 try() {
-	"$@" || yon "Fatal error: $*"
+    ( "$@" || yon "Fatal error: $*" )
 }
 
 trim_string(){
@@ -50,19 +50,35 @@ source_variables() {
     fi
 }
 
+# Adds necessary repo to install VS Code
+setup_vscode() {
+    rpm --import https://packages.microsoft.com/keys/microsoft.asc
+
+	if [ -f /etc/yum.repos.d/vscode.repo ];
+	then
+		return 0
+	else
+		echo "$VS_CODE_REPO" > /etc/yum.repos.d/vscode.repo
+    fi
+} 
+
 pre_install() {
+   # log "VSCode - Adding Microsoft Repo"
+   # try setup_vscode
+    dnf check-update
+
     log "Installing RPM Fusion"
     try dnf install -y \
         https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
-		https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm \
-		> "$debug"
+		https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 	log "Enabling Fedora community repos..."     
-		try dnf install dnf-plugins-core > "$debug"
+		try dnf install dnf-plugins-core
 
     log "Enabling alacritty community repo..."     
-	try dnf copr enable -y pschyska/alacritty > "$debug"
+	try dnf copr enable -y pschyska/alacritty
 	try dnf install alacritty
+
     log "Adding source variables and aliases" 
     try source_variables
 }
@@ -71,11 +87,11 @@ install_package() {
 	case $2 in
 		G)
 			log "Installing go package $1..."
-			try go get -u "$1" > "$debug"
+			try go get -u "$1"
             ;;
 		*)
 		    log "Installing $1 - "
-		    try dnf install -y "$1" > "$debug"
+		    try dnf install -y "$1"
             ;;
     esac
 }
@@ -87,17 +103,16 @@ install_packages() {
     while IFS='	' read -r flag program comment; do
 	   program=$(trim_string "$program")
 	   install_package $program $flag
-   done <<EOF
+    done <<EOF
 $packages
 EOF
 }
-
 
 install_dots() {
 	log "Downloading dot files"
 	git clone "$dotrepo" $USER_HOME/.config/rice > "$debug" || log "Dots have already been cloned"
 	log "Stowing dot files"
-	cd $USER_HOME/.config/rice && stow --target="$HOME" --ignore='gitignore' dots
+	cd $USER_HOME/.config/rice && stow --target="$USER_HOME" --ignore='gitignore' dots
 }
 
 install_vimplug() {
@@ -106,8 +121,8 @@ install_vimplug() {
 	    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     # On creation, autoload is owned by root:root. This stops VimPlug from working
     chown $SUDO_USER:$SUDO_USER $USER_HOME/.vim/autoload
-    # Link vim file with autoload and VimPlug to root user
-    ln -s $USER_HOME/.vim ~/
+    # Link User's vim file with root's vim file - allows autoload of VimPlug for root user
+    ln -fs $USER_HOME/.vim ~/
 }
 
 cleanup() {
@@ -118,8 +133,13 @@ main() {
 	dotrepo="https://github.com/scott96707/rice.git"
 	pkgfile="https://github.com/scott96707/rice/raw/master/packages"
 	USER_HOME="/home/$SUDO_USER"
-
-	RICE_DEBUG=1
+    VS_CODE_REPO='[vscode]
+name=Visual Studio Code
+baseurl=https://packages.microsoft.com/yumrepos/vscode
+enabled=1
+gpgcheck=1
+gpgkey=https://packages.microsoft.com/keys/microsoft.asc
+EOF'
 	if [ "$RICE_DEBUG" == 1 ]; then debug="/dev/stdout"; else debug="/dev/null"; fi
 
 	trap cleanup INT

@@ -2,6 +2,8 @@
 	git
 	stow		# symlink files like installing packages
 	go
+    code        # VSCode
+	npm		# Node package manager
 
 # Editor
 	vim

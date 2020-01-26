@@ -22,6 +22,7 @@ trim_string(){
 
 # Adding aliases and environment variable to the user's .bashrc
 source_variables() {
+    # Add for local user
 	if grep -lx 'source ~/.config/aliases' $USER_HOME/.bashrc; 
 	then
 		return 0
@@ -32,25 +33,38 @@ source_variables() {
 	then
 		return 0
 	else
-		echo "source ~/.profile" >> $USER_HOME/.bashrc
+		echo "source ~/.profile" >> ~/.bashrc
 	fi
+    # Add for root user
+	if grep -lx "source $USER_HOME/.config/aliases" ~/.bashrc; 
+	then
+		return 0
+	else
+		echo "source $USER_HOME/.config/aliases" >> ~/.bashrc
+	fi
+	if grep -lx 'source $USER_HOME/.profile' ~/.bashrc;
+	then
+		return 0
+	else
+		echo "source ~/.profile" >> ~/.bashrc
+    fi
 }
 
 pre_install() {
-	log "Installing RPM Fusion"
-	try dnf install -y \
-		https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
+    log "Installing RPM Fusion"
+    try dnf install -y \
+        https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
 		https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm \
 		> "$debug"
 
 	log "Enabling Fedora community repos..."     
 		try dnf install dnf-plugins-core > "$debug"
 
-	# log "Enabling alacritty community repo..."     
-	# try dnf copr enable -y pschyska/alacritty > "$debug"
-	# try dng install alacritty
+    log "Enabling alacritty community repo..."     
+	try dnf copr enable -y pschyska/alacritty > "$debug"
+	try dnf install alacritty
     log "Adding source variables and aliases" 
-	try source_variables
+    try source_variables
 }
 
 install_package() {

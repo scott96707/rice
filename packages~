@@ -8,13 +8,18 @@
 
 # Desktop Environment and Utilities
 	i3      # Keyboard-driven window manager
-	feh     # Add wallpapers to i3
+	feh     # Add wallpapers to i3 add line to .profile to customize
 
 # File Management
 G	github.com/gokcehan/lf      # extensive terminal file manager
-	fd-find
-	ripgrep
-	bat
-	fzf     # fuzzy finder
-	unrar	
-	unzip
+	fd-find     # Friendly find
+	ripgrep     # Friendly grep
+	bat         # Prints out files
+	fzf         # Fuzzy finder
+	unrar	    # Extracts rars
+	unzip       # Extracts zips
+
+# Misc.
+    youtube-dl          # Youtube downloader
+    libnotify           # Desktop notification w/o annoyance
+    dunst               # Notification system

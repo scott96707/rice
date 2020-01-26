@@ -12,9 +12,13 @@
 
 # File Management
 G	github.com/gokcehan/lf      # extensive terminal file manager
-	fd-find
-	ripgrep
-	bat
-	fzf     # fuzzy finder
-	unrar	
-	unzip
+	fd-find     # Friendly find
+	ripgrep     # Friendly grep
+	fzf         # Fuzzy finder
+	unrar	    # Extracts rars
+	unzip       # Extracts zips
+
+# Misc.
+    youtube-dl          # Youtube downloader
+    libnotify           # Desktop notification w/o annoyance
+    dunst               # Notification system

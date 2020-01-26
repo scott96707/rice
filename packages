@@ -1,20 +1,20 @@
 # Tools
 	git
-	stow	# symlink files like installing packages
+	stow		# symlink files like installing packages
 	go
 
 # Editor
 	vim
 
 # Desktop Environment and Utilities
-	i3	# Keyboard-driven window manager
-	feh	# Add wallpapers to i3
+	i3      # Keyboard-driven window manager
+	feh     # Add wallpapers to i3
 
 # File Management
-G	github.com/gokcehan/lf	# extensive terminal file manager
+G	github.com/gokcehan/lf      # extensive terminal file manager
 	fd-find
 	ripgrep
 	bat
-	fzf	# fuzzy finder
+	fzf     # fuzzy finder
 	unrar	
 	unzip

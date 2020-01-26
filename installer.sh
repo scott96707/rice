@@ -42,8 +42,8 @@ install_package() {
 			try go get -u "$1" > "$debug"
             ;;
 		*)
-            log "Installing $1 - "
-            try dnf install -y "$1" > "$debug"
+		    log "Installing $1 - "
+		    try dnf install -y "$1" > "$debug"
             ;;
     esac
 }
@@ -51,7 +51,7 @@ install_package() {
 install_packages() {
 	[ -f "$pkgfile" ] && (cp "$pkgfile" /tmp/pkgs) || (log "Downloading package list..." && curl -Ls "$pkgfile" > /tmp/pkgs)
 	
-    packages=$(sed '/^$/d' /tmp/pkgs | sed '/^#/d')
+    packages=$(sed -e '/^$/ d' -e '/^#/ d' -e 's/#.*//' /tmp/pkgs)
     while IFS='	' read -r flag program comment; do
 	   program=$(trim_string "$program")
 	   install_package $program $flag
@@ -60,26 +60,34 @@ $packages
 EOF
 }
 
-install_dots() {
-	log "Downloading dot files"
-	git clone "$dotrepo" $USER_HOME/.config/rice > "$debug" || log "Dots have already been cloned"
-	(cd $USER_HOME/.config/rice && stow -R --target="$HOME" --ignore='gitignore' dots)
-}
-
-install_vimplug() {
-	log "Downloading VimPlug"
-	curl -fLo $USER_HOME/.vim/autoload/plug.vim --create-dirs \
-	    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-}
-
-# Adding aliases to the user's .bashrc
-source_aliases() {
+# Adding aliases and environment variable to the user's .bashrc
+source_variables() {
 	if [ grep -Fxq "source ~/.config/aliases" $USER_HOME/.bashrc ];
 	then
 		return 1
 	else
 		echo "source ~/.config/aliases" >> $USER_HOME/.bashrc
 	fi
+	if [ grep -Fxq "source ~/.profile" $USER_HOME/.bashrc ];
+	then
+		return 1
+	else
+		echo "source ~/.profile" >> $USER_HOME/.bashrc
+	fi
+}
+install_dots() {
+	log "Downloading dot files"
+	git clone "$dotrepo" $USER_HOME/.config/rice > "$debug" || log "Dots have already been cloned"
+	log "Stowing dot files"
+	(cd $USER_HOME/.config/rice && stow -R --target="$HOME" --ignore='gitignore' dots)
+    log "Adding source variables and aliases" 
+	try source_variables
+}
+
+install_vimplug() {
+	log "Downloading VimPlug"
+	curl -fLo $USER_HOME/.vim/autoload/plug.vim --create-dirs \
+	    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 }
 
 cleanup() {
@@ -96,8 +104,8 @@ main() {
 	trap cleanup INT
 
 	pre_install
-	install_packages
 	install_dots
+	install_packages
 	install_vimplug
 }
 

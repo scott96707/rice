@@ -33,20 +33,20 @@ source_variables() {
 	then
 		return 0
 	else
-		echo "source ~/.profile" >> ~/.bashrc
+		echo "source ~/.profile" >> ~/root/.bashrc
 	fi
     # Add for root user
-	if grep -lx "source $USER_HOME/.config/aliases" ~/.bashrc; 
+	if grep -lx "source $USER_HOME/.config/aliases" ~/root/.bashrc; 
 	then
 		return 0
 	else
-		echo "source $USER_HOME/.config/aliases" >> ~/.bashrc
+		echo "source $USER_HOME/.config/aliases" >> ~/root/.bashrc
 	fi
-	if grep -lx 'source $USER_HOME/.profile' ~/.bashrc;
+	if grep -lx 'source $USER_HOME/.profile' ~/root/.bashrc;
 	then
 		return 0
 	else
-		echo "source ~/.profile" >> ~/.bashrc
+		echo "source ~/.profile" >> ~/root/.bashrc
     fi
 }
 

@@ -22,17 +22,15 @@ trim_string(){
 
 # Adding aliases and environment variable to the user's .bashrc
 source_variables() {
-	GREP_ALIASES=$( grep -x "source ~/.config/aliases" $USER_HOME/.bashrc )
-	if [ " $GREP_ALIASES" -gt 0 ];
+	if grep -lx 'source ~/.config/aliases' $USER_HOME/.bashrc; 
 	then
-		return 1
+		return 0
 	else
 		echo "source ~/.config/aliases" >> $USER_HOME/.bashrc
 	fi
-	GREP_PROFILE=$( grep -x "source ~/.profile" $USER_HOME/.bashrc )
-	if [ "$GREP_PROFILE" -gt 0  ]
+	if grep -lx 'source ~/.profile' $USER_HOME/.bashrc;
 	then
-		return 1
+		return 0
 	else
 		echo "source ~/.profile" >> $USER_HOME/.bashrc
 	fi
@@ -85,7 +83,7 @@ install_dots() {
 	log "Downloading dot files"
 	git clone "$dotrepo" $USER_HOME/.config/rice > "$debug" || log "Dots have already been cloned"
 	log "Stowing dot files"
-	(cd $USER_HOME/.config/rice && stow --target="$HOME" --ignore='gitignore' dots)
+	cd $USER_HOME/.config/rice && stow --target="$HOME" --ignore='gitignore' dots
 }
 
 install_vimplug() {
@@ -103,6 +101,7 @@ main() {
 	pkgfile="https://github.com/scott96707/rice/raw/master/packages"
 	USER_HOME="/home/$SUDO_USER"
 
+	RICE_DEBUG=1
 	if [ "$RICE_DEBUG" == 1 ]; then debug="/dev/stdout"; else debug="/dev/null"; fi
 
 	trap cleanup INT

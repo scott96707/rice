@@ -112,7 +112,7 @@ install_dots() {
 	log "Downloading dot files"
 	git clone "$dotrepo" $USER_HOME/.config/rice > "$debug" || log "Dots have already been cloned"
 	log "Stowing dot files"
-	cd $USER_HOME/.config/rice && stow --target="$USER_HOME" --ignore='gitignore' dots
+	cd $USER_HOME/.config/rice && sudo -u $SUDO_USER stow --target="$USER_HOME" --ignore='gitignore' dots
 }
 
 install_vimplug() {

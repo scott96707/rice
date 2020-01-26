@@ -22,13 +22,15 @@ trim_string(){
 
 # Adding aliases and environment variable to the user's .bashrc
 source_variables() {
-	if [ grep -x "source ~/.config/aliases" $USER_HOME/.bashrc ];
+	GREP_ALIASES=$( grep -x "source ~/.config/aliases" $USER_HOME/.bashrc )
+	if [ " $GREP_ALIASES" -gt 0 ];
 	then
 		return 1
 	else
 		echo "source ~/.config/aliases" >> $USER_HOME/.bashrc
 	fi
-	if [ grep -x "source ~/.profile" $USER_HOME/.bashrc ];
+	GREP_PROFILE=$( grep -x "source ~/.profile" $USER_HOME/.bashrc )
+	if [ "$GREP_PROFILE" -gt 0  ]
 	then
 		return 1
 	else

@@ -77,7 +77,7 @@ pre_install() {
 
     log "Enabling alacritty community repo..."     
 	try dnf copr enable -y pschyska/alacritty
-	try dnf install alacritty
+	try dnf install -y alacritty
 
     log "Adding source variables and aliases" 
     try source_variables

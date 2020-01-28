@@ -33,7 +33,7 @@ source_variables() {
 	then
 		return 0
 	else
-		echo "source ~/.profile" >> ~/root/.bashrc
+		echo "source ~/.profile" >> $USER_HOME/.bashrc
 	fi
     # Add for root user
 	if grep -lx "source $USER_HOME/.config/aliases" ~/root/.bashrc; 
@@ -42,11 +42,11 @@ source_variables() {
 	else
 		echo "source $USER_HOME/.config/aliases" >> ~/root/.bashrc
 	fi
-	if grep -lx 'source $USER_HOME/.profile' ~/root/.bashrc;
+	if grep -lx "source $USER_HOME/.profile" ~/root/.bashrc;
 	then
 		return 0
 	else
-		echo "source ~/.profile" >> ~/root/.bashrc
+		echo "source $USER_HOME/.profile" >> ~/root/.bashrc
     fi
 }
 
@@ -112,7 +112,7 @@ install_dots() {
 	log "Downloading dot files"
 	git clone "$dotrepo" $USER_HOME/.config/rice > "$debug" || log "Dots have already been cloned"
 	log "Stowing dot files"
-	cd $USER_HOME/.config/rice && sudo -u $SUDO_USER stow --target="$USER_HOME" --ignore='gitignore' dots
+	cd $USER_HOME/.config/rice && sudo -iu $SUDO_USER stow --target="$USER_HOME" --ignore='gitignore' dots
 }
 
 install_vimplug() {

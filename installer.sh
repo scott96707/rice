@@ -78,9 +78,6 @@ pre_install() {
     log "Enabling alacritty community repo..."     
 	try dnf copr enable -y pschyska/alacritty
 	try dnf install -y alacritty
-
-    log "Adding source variables and aliases" 
-    try source_variables
 }
 
 install_package() {
@@ -113,6 +110,8 @@ install_dots() {
 	sudo -iu $SUDO_USER git clone "$dotrepo" $USER_HOME/.config/rice > "$debug" || log "Dots have already been cloned"
 	log "Stowing dot files"
 	cd $USER_HOME/.config/rice && sudo -iu $SUDO_USER stow --target="$USER_HOME/" --ignore='gitignore' dots
+    log "Adding source variables and aliases" 
+    try source_variables
 }
 
 install_vimplug() {

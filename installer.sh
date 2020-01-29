@@ -109,7 +109,11 @@ install_dots() {
 	log "Downloading dot files"
 	sudo -iu $SUDO_USER git clone "$dotrepo" $USER_HOME/.config/rice > "$debug" || log "Dots have already been cloned"
 	log "Stowing dot files"
-	cd $USER_HOME/.config/rice && sudo -iu $SUDO_USER stow --target="$USER_HOME/" --ignore='gitignore' dots
+	sudo -u $SUDO_USER bash -c '\
+        cd $HOME/.config/rice \
+        stow --target="$HOME/" --ignore="gitignore" dots |\
+        bash
+    '
     log "Adding source variables and aliases" 
     try source_variables
 }

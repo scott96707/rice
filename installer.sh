@@ -70,7 +70,7 @@ source_variables() {
 
 setup_root() {
     log "Adding root user links and settings"
-    cd $HOME && ln -s $USER_HOME/.vimrc
+        cd $HOME && ln -s $USER_HOME/.vimrc && ln -s $USER_HOME/bin/
 	if grep -lx "source $USER_HOME/.config/aliases" $HOME/.bashrc; then return 0;
 	else echo "source $USER_HOME/.config/aliases" >> $HOME/.bashrc;	fi
 	if grep -lx "source $USER_HOME/.profile" $HOME/.bashrc; then return 0; 

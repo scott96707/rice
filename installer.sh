@@ -23,30 +23,30 @@ trim_string(){
 # Adding aliases and environment variable to the user's .bashrc
 source_variables() {
     # Add for local user
-	if grep -lx 'source ~/.config/aliases' $USER_HOME/.bashrc; 
+	if grep -lx "source ~/.config/aliases" $USER_HOME/.bashrc; 
 	then
 		return 0
 	else
 		echo "source ~/.config/aliases" >> $USER_HOME/.bashrc
 	fi
-	if grep -lx 'source ~/.profile' $USER_HOME/.bashrc;
+	if grep -lx "source ~/.profile" $USER_HOME/.bashrc;
 	then
 		return 0
 	else
 		echo "source ~/.profile" >> $USER_HOME/.bashrc
 	fi
     # Add for root user
-	if grep -lx "source $USER_HOME/.config/aliases" ~/root/.bashrc; 
+	if grep -lx "source $USER_HOME/.config/aliases" $HOME/.bashrc; 
 	then
 		return 0
 	else
-		echo "source $USER_HOME/.config/aliases" >> ~/root/.bashrc
+		echo "source $USER_HOME/.config/aliases" >> $HOME/bashrc
 	fi
-	if grep -lx "source $USER_HOME/.profile" ~/root/.bashrc;
+	if grep -lx "source $USER_HOME/.profile" $HOME/bashrc;
 	then
 		return 0
 	else
-		echo "source $USER_HOME/.profile" >> ~/root/.bashrc
+		echo "source $USER_HOME/.profile" >> $HOME/bashrc
     fi
 }
 
@@ -107,25 +107,24 @@ EOF
 
 install_dots() {
 	log "Downloading dot files"
-	sudo -iu $SUDO_USER git clone "$dotrepo" $USER_HOME/.config/rice > "$debug" || log "Dots have already been cloned"
+	sudo -u $SUDO_USER git clone "$dotrepo" $USER_HOME/.config/rice > "$debug" || log "Dots have already been cloned"
 	log "Stowing dot files"
 	sudo -u $SUDO_USER bash -c '\
         cd $HOME/.config/rice \
         stow --target="$HOME/" --ignore="gitignore" dots |\
-        bash
-    '
+        bash'
     log "Adding source variables and aliases" 
     try source_variables
 }
 
 install_vimplug() {
 	log "Downloading VimPlug"
-	curl -fLo $USER_HOME/.vim/autoload/plug.vim --create-dirs \
+	sudo -u $SUDO_USER curl -fLo $USER_HOME/.vim/autoload/plug.vim --create-dirs \
 	    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     # On creation, autoload is owned by root:root. This stops VimPlug from working
-    chown $SUDO_USER:$SUDO_USER $USER_HOME/.vim/autoload
+    # chown $SUDO_USER:$SUDO_USER $USER_HOME/.vim/autoload
     # Link User's vim file with root's vim file - allows autoload of VimPlug for root user
-    ln -fs $USER_HOME/.vim ~/
+    ln -s $USER_HOME/.vim ~/
 }
 
 install_vscode_extensions() {

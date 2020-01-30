@@ -3,14 +3,15 @@
 	stow		# symlink files like installing packages
 	go
     code        # VSCode
-	npm		# Node package manager
+    npm		    # Node package manager
+    xclip       # useful bash command for clipboard
 
 # Editor
 	vim
 
 # Desktop Environment and Utilities
-	i3      # Keyboard-driven window manager
-	feh     # Add wallpapers to i3 add line to .profile to customize
+	i3          # Keyboard-driven window manager
+	feh         # Add wallpapers to i3 add line to .profile to customize
 
 # File Management
 G	github.com/gokcehan/lf      # extensive terminal file manager

@@ -63,6 +63,13 @@ $packages
 EOF
 }
 
+install_dots() {
+	log "Downloading dot files"
+	sudo -u $SUDO_USER git clone "$dotrepo" $USER_HOME/.config/rice > "$debug" || log "Dots have already been cloned"
+	log "Stowing dot files"
+	sudo -u $SUDO_USER bash -c 'cd $HOME/.config/rice; 
+        stow --target="$HOME/" --ignore="gitignore" dots;' > "$debug" || log "Dots failed to stow"
+}
 source_variables() {
     log "Adding source variables and aliases" 
 	if grep -lx "source ~/.config/aliases" $USER_HOME/.bashrc; then return 0;
@@ -80,14 +87,6 @@ setup_root() {
     else echo "source $USER_HOME/.profile" >> $HOME/.bashrc; fi
 }
 
-install_dots() {
-	log "Downloading dot files"
-	sudo -u $SUDO_USER git clone "$dotrepo" $USER_HOME/.config/rice > "$debug" || log "Dots have already been cloned"
-	log "Stowing dot files"
-	sudo -u $SUDO_USER bash -c 'cd $HOME/.config/rice; 
-        stow --target="$HOME/" --ignore="gitignore" dots;' > "$debug" || log "Dots failed to stow"
-}
-
 install_vimplug() {
 	log "Downloading VimPlug"
 	sudo -u $SUDO_USER curl -fLo $USER_HOME/.vim/autoload/plug.vim --create-dirs \
@@ -102,8 +101,7 @@ name=Visual Studio Code
 baseurl=https://packages.microsoft.com/yumrepos/vscode
 enabled=1
 gpgcheck=1
-gpgkey=https://packages.microsoft.com/keys/microsoft.asc
-EOF'
+gpgkey=https://packages.microsoft.com/keys/microsoft.asc'
 	if [ -f /etc/yum.repos.d/vscode.repo ];	then return 0;
 	else echo "$VS_CODE_REPO" > /etc/yum.repos.d/vscode.repo; fi
     
@@ -127,7 +125,7 @@ main() {
     install_packages
     install_dots
     source_variables
-    install_vimplug
     setup_root
+    install_vimplug
 }
 main

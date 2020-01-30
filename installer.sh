@@ -41,7 +41,7 @@ install_package() {
 			log "Installing go package $1..."
 			try go get -u "$1"
             ;;
-        S)
+        X)
             log "Skipping installation of $1"
             ;;
 		*)

@@ -1,7 +1,7 @@
 set clipboard+=unnamedplus   " Sets clipboard to use system's board
 set mouse=v             " Middle-click paste with mouse
 set ignorecase          " Case insensitive matching
-set expandtab           " Converts tabs to white space 
+"set expandtab           " Converts tabs to spaces 
 set tabstop=4           " Number of columns occupied by a tab
 "set foldmethod=indent   " Automatically set to indention folding.  Thank the Lord
 set softtabstop=4       " Number of spaces in tab when editing
@@ -17,6 +17,7 @@ set nobackup            " Stops backup files. Same name as orig with '~' added
 map <F2> :NERDTreeToggle<CR> 
 " ^^ Set NerdTree to F2 key
 
+autocmd BufEnter *.py set ai sw=4 ts=4 sta et fo=croql		" Set tabs to spaces for Python programs
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS " Enable autocomplete for CSS
 
 if has('win32') " Commands to use if on windows

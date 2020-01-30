@@ -45,9 +45,9 @@ pre_install() {
 	try dnf copr enable -y pschyska/alacritty
 	try dnf install -y alacritty
 
-    log "VSCode - Adding Microsoft Repo"
-    try setup_vscode
-    dnf check-update
+    #log "VSCode - Adding Microsoft Repo"
+    #try setup_vscode
+    #dnf check-update
 }
 
 install_package() {
@@ -95,13 +95,13 @@ source_variables() {
 	then
 		return 0
 	else
-		echo "source $USER_HOME/.config/aliases" >> $HOME/bashrc
+		echo "source $USER_HOME/.config/aliases" >> $HOME/.bashrc
 	fi
-	if grep -lx "source $USER_HOME/.profile" $HOME/bashrc;
+	if grep -lx "source $USER_HOME/.profile" $HOME/.bashrc;
 	then
 		return 0
 	else
-		echo "source $USER_HOME/.profile" >> $HOME/bashrc
+		echo "source $USER_HOME/.profile" >> $HOME/.bashrc
     fi
 }
 
@@ -150,7 +150,7 @@ EOF'
     install_packages
     install_dots
     install_vimplug
-    install_vscode_extensions
+    #install_vscode_extensions
 }
 
 main

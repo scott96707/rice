@@ -2,7 +2,7 @@
 	git
 	stow		# symlink files like installing packages
 	go
-    code        # VSCode
+S   code        # VSCode skipping this because I don't want to use it if I can help it
     npm		    # Node package manager
     xclip       # useful bash command for clipboard
 

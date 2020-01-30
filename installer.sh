@@ -41,6 +41,9 @@ install_package() {
 			log "Installing go package $1..."
 			try go get -u "$1"
             ;;
+        S)
+            log "Skipping installation of $1"
+            ;;
 		*)
 		    log "Installing $1... "
 		    try dnf install -y "$1"
@@ -70,7 +73,7 @@ source_variables() {
 
 setup_root() {
     log "Adding root user links and settings"
-        cd $HOME && ln -s $USER_HOME/.vimrc && ln -s $USER_HOME/bin/
+    cd $HOME && ln -s $USER_HOME/.vimrc && ln -s $USER_HOME/bin/
 	if grep -lx "source $USER_HOME/.config/aliases" $HOME/.bashrc; then return 0;
 	else echo "source $USER_HOME/.config/aliases" >> $HOME/.bashrc;	fi
 	if grep -lx "source $USER_HOME/.profile" $HOME/.bashrc; then return 0; 

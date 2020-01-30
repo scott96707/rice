@@ -30,7 +30,7 @@ if !exists('g:airline_symbols')  "air-line setup
         let g:airline_symbols={}
 endif
 
- Vim-plug setup
+" Vim-plug setup
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

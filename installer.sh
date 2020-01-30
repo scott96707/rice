@@ -33,10 +33,6 @@ setup_vscode() {
 } 
 
 pre_install() {
-   # log "VSCode - Adding Microsoft Repo"
-    try setup_vscode
-    dnf check-update
-
     log "Installing RPM Fusion"
     try dnf install -y \
         https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
@@ -48,6 +44,10 @@ pre_install() {
     log "Enabling alacritty community repo..."     
 	try dnf copr enable -y pschyska/alacritty
 	try dnf install -y alacritty
+
+    log "VSCode - Adding Microsoft Repo"
+    try setup_vscode
+    dnf check-update
 }
 
 install_package() {
@@ -120,9 +120,6 @@ install_vimplug() {
 	log "Downloading VimPlug"
 	sudo -u $SUDO_USER curl -fLo $USER_HOME/.vim/autoload/plug.vim --create-dirs \
 	    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    # On creation, autoload is owned by root:root. This stops VimPlug from working
-    # chown $SUDO_USER:$SUDO_USER $USER_HOME/.vim/autoload
-    # Link User's vim file with root's vim file - allows autoload of VimPlug for root user
     ln -s $USER_HOME/.vim ~/
 }
 
@@ -153,7 +150,7 @@ EOF'
     install_packages
     install_dots
     install_vimplug
-    install_vscode_extension
+    install_vscode_extensions
 }
 
 main

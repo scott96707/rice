@@ -20,36 +20,6 @@ trim_string(){
 	printf '%s\n' "$trim"
 }
 
-# Adding aliases and environment variable to the user's .bashrc
-source_variables() {
-    # Add for local user
-	if grep -lx "source ~/.config/aliases" $USER_HOME/.bashrc; 
-	then
-		return 0
-	else
-		echo "source ~/.config/aliases" >> $USER_HOME/.bashrc
-	fi
-	if grep -lx "source ~/.profile" $USER_HOME/.bashrc;
-	then
-		return 0
-	else
-		echo "source ~/.profile" >> $USER_HOME/.bashrc
-	fi
-    # Add for root user
-	if grep -lx "source $USER_HOME/.config/aliases" $HOME/.bashrc; 
-	then
-		return 0
-	else
-		echo "source $USER_HOME/.config/aliases" >> $HOME/bashrc
-	fi
-	if grep -lx "source $USER_HOME/.profile" $HOME/bashrc;
-	then
-		return 0
-	else
-		echo "source $USER_HOME/.profile" >> $HOME/bashrc
-    fi
-}
-
 # Adds necessary repo to install VS Code
 setup_vscode() {
     rpm --import https://packages.microsoft.com/keys/microsoft.asc
@@ -64,7 +34,7 @@ setup_vscode() {
 
 pre_install() {
    # log "VSCode - Adding Microsoft Repo"
-   # try setup_vscode
+    try setup_vscode
     dnf check-update
 
     log "Installing RPM Fusion"
@@ -105,14 +75,43 @@ $packages
 EOF
 }
 
+# Adding aliases and environment variable to the user's .bashrc
+source_variables() {
+    # Add for local user
+	if grep -lx "source ~/.config/aliases" $USER_HOME/.bashrc; 
+	then
+		return 0
+	else
+		echo "source ~/.config/aliases" >> $USER_HOME/.bashrc
+	fi
+	if grep -lx "source ~/.profile" $USER_HOME/.bashrc;
+	then
+		return 0
+	else
+		echo "source ~/.profile" >> $USER_HOME/.bashrc
+	fi
+    # Add for root user
+	if grep -lx "source $USER_HOME/.config/aliases" $HOME/.bashrc; 
+	then
+		return 0
+	else
+		echo "source $USER_HOME/.config/aliases" >> $HOME/bashrc
+	fi
+	if grep -lx "source $USER_HOME/.profile" $HOME/bashrc;
+	then
+		return 0
+	else
+		echo "source $USER_HOME/.profile" >> $HOME/bashrc
+    fi
+}
+
 install_dots() {
 	log "Downloading dot files"
 	sudo -u $SUDO_USER git clone "$dotrepo" $USER_HOME/.config/rice > "$debug" || log "Dots have already been cloned"
 	log "Stowing dot files"
 	sudo -u $SUDO_USER bash -c '\
-        cd $HOME/.config/rice \
-        stow --target="$HOME/" --ignore="gitignore" dots |\
-        bash'
+        cd $HOME/.config/rice; 
+        stow --target="$HOME/" --ignore="gitignore" dots;'
     log "Adding source variables and aliases" 
     try source_variables
 }
@@ -150,10 +149,10 @@ EOF'
 
 	trap cleanup INT
 
-	pre_install
-	install_packages
-	install_dots
-	install_vimplug
+    pre_install
+    install_packages
+    install_dots
+    install_vimplug
     install_vscode_extension
 }
 

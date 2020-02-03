@@ -24,13 +24,13 @@ window:
   # Units are physical pixels; this is not DPI aware.
   # (change requires restart)
   padding:
-    x: 10
-    y: 10
+    x: 2
+    y: 2
 
   # Window decorations
   # Setting this to false will result in window without borders and title bar.
-  #decorations: transparent
-  decorations: 'none'
+  #decorations: 'transparent'
+  decorations: 'full'
 
 # Display tabs using this many cells (changes require restart)
 tabspaces: 8
@@ -181,7 +181,9 @@ mouse:
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
-
+  # When set to `true`, selected text will be copied to the primary clipboard.
+  save_to_clipboard: true
+  
 dynamic_title: true
 
 hide_cursor_when_typing: true

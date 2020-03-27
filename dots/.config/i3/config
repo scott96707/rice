@@ -17,6 +17,10 @@ bindsym $mod+Return exec "$TERMINAL"
 # start firefox
 bindsym $mod+Shift+f exec firefox
 
+# audio control
+bindsym Mod4+comma exec amixer set Master -q 5%-
+bindsym Mod4+period exec amixer set Master -q 5%+
+
 # kill focused window
 bindsym $mod+Shift+q kill
 

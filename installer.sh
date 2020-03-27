@@ -41,7 +41,7 @@ install_package() {
 			log "Installing go package $1..."
 			try go get -u "$1"
             ;;
-        S)
+        X)
             log "Skipping installation of $1"
             ;;
 		*)
@@ -78,7 +78,7 @@ source_variables() {
 	else echo "source ~/.profile" >> $USER_HOME/.bashrc; fi
 }
 
-setup_root() {
+source_root () {
     log "Adding root user links and settings"
     cd $HOME && ln -s $USER_HOME/.vimrc && ln -s $USER_HOME/bin/
 	if grep -lx "source $USER_HOME/.config/aliases" $HOME/.bashrc; then return 0;
@@ -125,7 +125,7 @@ main() {
     install_packages
     install_dots
     source_variables
-    setup_root
+    source_root 
     install_vimplug
 }
 main

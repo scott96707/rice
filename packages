@@ -25,3 +25,4 @@ G	github.com/gokcehan/lf		# extensive terminal file manager
 	youtube-dl		# Youtube downloader
 	libnotify		# Desktop notification w/o annoyance
 	dunst			# Notification system
+    calc            # Command line calculator!!

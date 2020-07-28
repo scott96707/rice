@@ -3,6 +3,9 @@ alias servers='sh ~/bin/servers.sh'
 
 # User specific aliases and functions
 alias l='ls -ahl'
-alias weather='curl wttr.in/Denver'
+<<<<<<< HEAD:dots/.config/aliases
+alias weather='curl wttr.in/39.533393,-104.845946?u'
 alias timeout='sh ~/bin/timeout.sh'
 alias docker='podman'
+=======
+>>>>>>> 2903e10ba921586bd002c9b2605eaf118f4183a5:aliases

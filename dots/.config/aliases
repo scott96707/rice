@@ -1,7 +1,8 @@
 # CSG Specific alias
 alias servers='sh ~/bin/servers.sh'
-alias s='sh ~/bin/servers.sh'
 
 # User specific aliases and functions
 alias l='ls -ahl'
 alias weather='curl wttr.in/Denver'
+alias timeout='sh ~/bin/timeout.sh'
+alias docker='podman'

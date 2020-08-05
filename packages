@@ -5,6 +5,7 @@
 X	code			# VSCode skipping this because I don't want to use it if I can help it
 	npm				# Node package manage
 	xclip			# useful bash command for clipboard
+    google-cloud-sdk    # Necessary for google cloud development    
 
 # Editor
 	vim

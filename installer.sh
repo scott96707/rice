@@ -107,6 +107,17 @@ install_vimplug() {
 	vim +'PlugInstall --sync' +qa
 }
 
+install_fonts() {
+	mkdir ~/.local/share/fonts
+	cp ~/.config/rice/dots/.fonts/*
+	fc-cache -v
+}
+
+move_alacritty() {
+	mkdir ~/.alacritty/
+	cp ~/.config/rice/alacritty/alacritty.yml ~/.alacritty/ 
+}
+
 setup_vscode() {
     log "VSCode - Adding Microsoft Repo"
     VS_CODE_REPO='[vscode]
@@ -140,5 +151,7 @@ main() {
     source_variables
     source_root 
     install_vimplug
+	install_fonts
+	move_alacritty
 }
 main

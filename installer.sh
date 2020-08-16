@@ -104,6 +104,7 @@ install_vimplug() {
 	sudo -u $SUDO_USER curl -fLo $USER_HOME/.vim/autoload/plug.vim --create-dirs \
 	    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     ln -s $USER_HOME/.vim ~/
+	vim +'PlugInstall --sync' +qa
 }
 
 setup_vscode() {

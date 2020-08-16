@@ -53,6 +53,7 @@ Plug 'posva/vim-vue' "Add Vue.JS syntax
 Plug 'mxw/vim-jsx' "Add JSX syntax
 Plug 'pangloss/vim-javascript' "JS syntax and indention support
 Plug 'isRuslan/vim-es6' " Adds ES6 syntax support
+Plug 'dracula/vim', { 'as': 'dracula' }
 " End Vim-plug setup
 call plug#end()
 

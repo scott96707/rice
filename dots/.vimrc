@@ -14,6 +14,7 @@ set nobackup            " Stops backup files. Same name as orig with '~' added
 
 autocmd BufEnter *.tf set ai sw=2 ts=2 sta et fo=croql
 
+<<<<<<< HEAD
 nnoremap <F5> :call SetLineNumbering()<CR>
 function! SetLineNumbering()
 	if &relativenumber
@@ -34,6 +35,9 @@ if uname == 'Linux' || uname == 'Darwin'
 else " windows
     " do windows command
 endif
+=======
+let g:airline_powerline_fonts=1  "air-line setup
+>>>>>>> e752ef78524156cc85dbab2f13bade01f9aaeb09
 
 " air-line setup
 let g:airline_powerline_fonts=1
@@ -47,8 +51,13 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+<<<<<<< HEAD
 call plug#begin('~/.vim/plugged')
 " List of Plugins below
+=======
+
+call plug#begin('~/.vim/plugged')
+>>>>>>> e752ef78524156cc85dbab2f13bade01f9aaeb09
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -63,7 +72,10 @@ Plug 'mxw/vim-jsx' " Add JSX syntax
 Plug 'pangloss/vim-javascript' " JS syntax and indention support
 Plug 'isRuslan/vim-es6' " Adds ES6 syntax support
 Plug 'dracula/vim', { 'as': 'dracula' }
+<<<<<<< HEAD
 " End Vim-plug plugins
+=======
+>>>>>>> e752ef78524156cc85dbab2f13bade01f9aaeb09
 call plug#end()
 
 colorscheme dracula " Sets color scheme to Dracula

@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        # ...
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+        # Mac OSX
+
 log() {
 	printf '\033[1;33m%s \033[m%s\033[m %s\n' \
 		"${3:-->}" "${2:+[1;36m}$1${2:+[m}" "$2"

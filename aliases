@@ -1,8 +1,13 @@
-# CSG Specific alias
-alias servers='sh ~/bin/servers.sh'
-
 # User specific aliases and functions
+alias h='helm'
+alias i='istioctl'
+alias k='kubectl'
+
+alias commit='git commit -Sa'
+alias dev='gcloud config set project dev-getsunday ; gcloud container clusters get-credentials sunday-dev-cluster --region us-central1 ; export WORKING_ENV=develop ; set_prompt'
+alias prod='gcloud config set project prod-getsunday ; gcloud container clusters get-credentials sunday-prod-cluster --region us-central1 ; export WORKING_ENV=PRODUCTION ; set_prompt'
+alias stage='gcloud config set project stage-getsunday ; gcloud container clusters get-credentials sunday-stage-cluster --region us-central1 ; export WORKING_ENV=stage ; set_prompt'
+
 alias l='ls -ahl'
-alias weather='curl wttr.in/39.533393,-104.845946?u'
-alias docker='podman'
-alias flip4='sh ~/bin/flip4.sh'
+alias t='terraform'
+alias weather='curl wttr.in/Lone+Tree+CO'

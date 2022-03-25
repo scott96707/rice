@@ -14,6 +14,19 @@ X	code			# VSCode skipping this because I don't want to use it if I can help it
 	i3				# Keyboard-driven window manager
 	feh				# Add wallpapers to i3 add line to .profile to customize
 
+# Brew
+	ack	
+	docker
+	helm
+	istioctl
+	jq
+	k9s
+	node
+	python
+	sops
+	yarn
+	yq
+
 # File Management
 G	github.com/gokcehan/lf		# extensive terminal file manager
 	fd-find			# Friendly find

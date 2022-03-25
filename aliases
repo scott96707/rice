@@ -1,13 +1,84 @@
 # User specific aliases and functions
+alias l='ls -ahl'
+alias weather='curl wttr.in/Lone+Tree+CO'
+alias rm-mdm='sh ~/bin/sunday/remove_electric_mdm.sh'
+
+# Helm and Istio
 alias h='helm'
 alias i='istioctl'
-alias k='kubectl'
 
+# Git aliases
+alias tags="git tag -l | gsed '/-/!{s/$/_/}' | sort -V | sed 's/_$//'"
 alias commit='git commit -Sa'
-alias dev='gcloud config set project dev-getsunday ; gcloud container clusters get-credentials sunday-dev-cluster --region us-central1 ; export WORKING_ENV=develop ; set_prompt'
-alias prod='gcloud config set project prod-getsunday ; gcloud container clusters get-credentials sunday-prod-cluster --region us-central1 ; export WORKING_ENV=PRODUCTION ; set_prompt'
-alias stage='gcloud config set project stage-getsunday ; gcloud container clusters get-credentials sunday-stage-cluster --region us-central1 ; export WORKING_ENV=stage ; set_prompt'
 
-alias l='ls -ahl'
+kcc() {
+    # Switch current kube context to $1 if provided or prompt caller to
+    # select from the available contexts in the current kube config.
+    ctx=$([ -z "$1" ] && kubectl config get-contexts -o name | fzf || printf "$1")
+    [ -z "$ctx" ] || kubectl config use-context $ctx
+}
+
+kc() {
+    # Automatically apply the --context=$1 to each kubectl command. When
+    # no $1 is passed the env var is unset.
+    [ -z "$1" ] && unset KUBECTX || export KUBECTX="$1"
+}
+
+kn() {
+    # Automatically apply the --namespace=$1 to each kubectl
+    # command. When no $1 is passed the env var is unset.
+    [ -z "$1" ] && KUBENS="default" || export KUBENS=$1
+}
+
+kubectl() {
+    # Override the kubectl command to automatically apply flags based on
+    # environment variables.
+    command kubectl \
+            $([ -z "$KUBENS" ] || printf "--namespace=$KUBENS") \
+            $([ -z "$KUBECTX" ] || printf "--context=$KUBECTX") \
+            $@
+}
+
+helm() {
+    # Override the helm command to automatically apply flags based on
+    # environment variables.
+    command helm \
+            $([ -z "$KUBENS" ] || printf "--namespace=$KUBENS") \
+            $([ -z "$KUBECTX" ] || printf "--kube-context=$KUBECTX") \
+            $@
+}
+
+istioctl() {
+    # Override the istioctl command to automatically apply flags based on
+    # environment variables.
+    command istioctl \
+            $([ -z "$KUBENS" ] || printf "--namespace=$KUBENS") \
+            $([ -z "$KUBECTX" ] || printf "--context=$KUBECTX") \
+            $@
+}
+
+# Sunday Environments
+alias dev='kcc dev && gcloud config set project dev-getsunday'
+alias stage='kcc stage && gcloud config set project stage-getsunday'
+alias prod='kcc prod && gcloud config set project prod-getsunday'
+
+# Kubectl aliases. Plugins can be installed with krew
+alias k='kubectl'
+alias kd='kubectl describe'
+alias kg='kubectl get'
+alias kgj='kubectl get jobs'
+alias kgp='kubectl get pods'
+
+# Terraform aliases
 alias t='terraform'
-alias weather='curl wttr.in/Lone+Tree+CO'
+alias tg='terragrunt'
+alias tgp='terragrunt plan-all'
+
+# Vim using FZF
+alias vimf='vim $(fzf --height 40%)'
+
+# Zsh aliases
+timezsh() {
+  shell=${1-$SHELL}
+  for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
+}

@@ -1,11 +1,13 @@
 set clipboard+=unnamedplus   " Sets clipboard to use system's board (Linux)
 set mouse=v             " Middle-click paste with mouse
 set ignorecase          " Case insensitive matching
+set expandtab           " Converts tabs to spaces 
 set tabstop=4           " Number of columns occupied by a tab
+"set foldmethod=indent   " Automatically set to indention folding.  Thank the Lord
 set softtabstop=4       " Number of spaces in tab when editing
 set shiftwidth=4        " When indenting with '>', use 4 spaces
 set number              " Display line numbers on left margin
-set relativenumber      " Display relative line numbers
+"set relativenumber      " Display relative line numbers
 set cursorline          " Highlight current line
 set hlsearch            " Highlights search matches
 set wildmenu            " Visual autocomplete for command menu, use Tab to display commands
@@ -13,6 +15,7 @@ set showmatch           " Shows matching character for parenthesis-like characte
 set nobackup            " Stops backup files. Same name as orig with '~' added
 
 autocmd BufEnter *.tf set ai sw=2 ts=2 sta et fo=croql
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS " Enable autocomplete for CSS
 
 nnoremap <F5> :call SetLineNumbering()<CR>
 function! SetLineNumbering()
@@ -52,7 +55,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'mattn/emmet-vim'
 Plug 'beautify-web/js-beautify'
 Plug 'airblade/vim-gitgutter'
 Plug 'rafi/awesome-vim-colorschemes'
@@ -66,4 +68,6 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 " End Vim-plug plugins
 call plug#end()
 
-colorscheme dracula " Sets color scheme to Dracula
+packadd! dracula
+syntax enable
+colorscheme dracula" Sets color scheme to Dracula

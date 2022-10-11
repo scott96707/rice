@@ -1,3 +1,11 @@
+[core]
+	editor = vim
 [user]
-    name = scott96707
-    email = scott96707@gmail.com
+	name = Scott Green
+	email = scott96707@gmail.com
+[gpg]
+	program = gpg
+[diff "sopsdiffer"]
+	textconv = sops -d
+[commit]
+	gpgsign = true

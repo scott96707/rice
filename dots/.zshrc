@@ -20,7 +20,6 @@ source $ZSH/oh-my-zsh.sh
 # Enable krew plugins
 export PATH="${PATH}:${HOME}/.krew/bin"
 
-# setup prompt (borrowed from Mark)
 git_prompt() {
     ref=$(git_current_branch)
     [ -z "$ref" ] || echo "%F{11}$ref%f "
@@ -30,3 +29,8 @@ kube_prompt() {
     [ -z "$ctx" ] || echo -n "%F{227}$ctx%f:"
     [ -z "$KUBENS" ] || echo -n "%F{46}$KUBENS%f"
 }
+PROMPT='($(kube_prompt)) %F{9}%2~%f $(git_prompt)%B%F{166}ʡ%b%f '
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

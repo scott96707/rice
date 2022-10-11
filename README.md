@@ -9,6 +9,11 @@ Install Homebrew with
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
+With Homebrew, install:
+- git
+- vim
+- gpg
+
 Vim will automagically install the plugins on first run.
 
 Install Electric MDM and then rip its gut out with the script.

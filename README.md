@@ -17,6 +17,11 @@ With Homebrew, install:
 Vim will automagically install the plugins on first run.
 
 Log into Github and create an [SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+Follow Github's instructions to create and add a GPG key for signing commits.
+Make sure the GPG agent is running so you don't have to type the GPG passphrase every commit:
+- Add "use-agent" to ~/.gnupg/gpg.conf
+- eval `$(gpg-agent --daemon --sh)`
+- Commit once, type your passphrase. You shouldn't need the phrase for any commits afterward.
 
 Install Electric MDM and then rip its gut out with the script.
 

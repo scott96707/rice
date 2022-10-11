@@ -16,6 +16,8 @@ With Homebrew, install:
 
 Vim will automagically install the plugins on first run.
 
+Log into Github and create an [SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+
 Install Electric MDM and then rip its gut out with the script.
 
 Install zsh and then oh-my-zsh with 

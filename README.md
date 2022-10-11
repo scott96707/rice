@@ -9,13 +9,7 @@ Install Homebrew with
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-Install VimPlug with
-```bash
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-```
-
-Inside the .vimrc, run :PlugInstall
+Vim will automagically install the plugins on first run.
 
 Install Electric MDM and then rip its gut out with the script.
 

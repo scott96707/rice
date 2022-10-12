@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 source ~/aliases
 source ~/.profile
-export ZSH="/Users/scottgreen/.oh-my-zsh"
+export ZSH="~/.oh-my-zsh"
 
 plugins=(
 	zsh-syntax-highlighting
@@ -15,7 +15,7 @@ getCtx() {
 source $ZSH/oh-my-zsh.sh
 
 # Enable kubectl auto-completion
-#[[ /Users/scottgreen/google-cloud-sdk/bin/kubectl ]] && source <(kubectl completion zsh)
+#[[ ~/google-cloud-sdk/bin/kubectl ]] && source <(kubectl completion zsh)
 
 # Enable krew plugins
 export PATH="${PATH}:${HOME}/.krew/bin"

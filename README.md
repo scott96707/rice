@@ -4,37 +4,36 @@ Copy the dot files to your ~/ directory.
 Import the iTerm2 profile into the app.
 Use Bitwarden to retrieve the secret files.
 
+Install [Rectangle](https://rectangleapp.com/) for window management.
+
 Install Homebrew with
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
 With Homebrew, install:
-- git
-- vim
-- gpg
-
+```bash
+brew install git 
+brew install vim 
+brew install gpg 
+brew install --cask iterm2 
+brew install svn 
+brew tap homebrew/cask-fonts 
+brew install --cask font-source-code-pro
+brew install tree
+```
 Vim will automagically install the plugins on first run.
 
 Log into Github and create an [SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 Follow Github's instructions to create and add a GPG key for signing commits.
 Make sure the GPG agent is running so you don't have to type the GPG passphrase every commit:
 - Add "use-agent" to ~/.gnupg/gpg.conf
-- eval `$(gpg-agent --daemon --sh)`
+- `eval $(gpg-agent --daemon --sh)`
 - Commit once, type your passphrase. You shouldn't need the phrase for any commits afterward.
 
 Install Electric MDM and then rip its gut out with the script.
 
 Install zsh and then oh-my-zsh with 
 ```bash
-brew install zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"`
 ```
-
-Install iTerm2 with
-``` bash
-brew install --cask iterm2
-brew tap homebrew/cask-fonts && brew install --cask font-source-code-pro
-```
-
-Setup a new Github SSH key.

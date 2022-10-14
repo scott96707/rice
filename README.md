@@ -22,6 +22,7 @@ brew tap homebrew/cask-fonts
 brew install --cask font-source-code-pro
 brew install terraform
 brew install tree
+brew install jq
 ```
 Vim will automagically install the plugins on first run.
 

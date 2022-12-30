@@ -9,3 +9,5 @@
 	textconv = sops -d
 [commit]
 	gpgsign = true
+[push]
+	autoSetupRemote = true

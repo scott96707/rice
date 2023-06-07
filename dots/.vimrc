@@ -9,14 +9,19 @@ set shiftwidth=2             " When indenting with >, use 4 spaces
 set showmatch                " Shows matching character for parenthesis-like characters
 set softtabstop=2            " Number of spaces in tab when editing
 set tabstop=2                " Number of columns occupied by a tab
+set colorcolumn=80
 
 let mapleader=","
 
 noremap <F5> :set list!<CR>
-nnoremap <F6> :set number! <bar> :GitGutterToggle<CR>
-vmap     <C-F>f <Plug>CtrlSFVwordPath
+nnoremap <F6> :set number!<CR>
+nnoremap <F7> :GitGutterToggle<CR>
+nnoremap <F8> :Git blame<CR>
+
 " Runs CtrlSF with , W
+vmap     <C-F>f <Plug>CtrlSFVwordPath
 nnoremap <leader>W :CtrlSFVwordPath
+
 " Search and replace text highlighted in Visual mode
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
@@ -24,9 +29,7 @@ vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 let g:python_highlight_all=1
 let g:python_highlight_builtins=1
 
-"Explore mode default setting
-let g:netrw_liststyle=1    
-
+"Remaps clipboard for usability
 let uname = substitute(system('uname'),'\n','','')
 " Example values: Linux, Darwin, MINGW64_NT-10.0, MINGW32_NT-6.1
 if uname == 'Linux' || uname == 'Darwin'
@@ -39,6 +42,17 @@ if !exists('g:airline_symbols')
   let g:airline_symbols={}
 endif
 
+" Splitjoin setup
+let g:splitjoin_split_mapping = ''
+let g:splitjoin_join_mapping = ''
+map sj :SplitjoinSplit<cr>
+nmap sk :SplitjoinJoin<cr>
+
+" Fugitive Conflict Resolution
+nnoremap <leader>gd :Gvdiffsplit<CR>
+nnoremap gdh :diffget //2<CR>
+nnoremap gdl :diffget //3<CR>
+
 " Vim-plug setup
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -50,11 +64,13 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 " Colors rgb, hex values in-line
 Plug 'ap/vim-css-color' 
+Plug 'andrewradev/splitjoin.vim'
 Plug 'beautify-web/js-beautify'
 " Fuzzyfinder for files within vim
 Plug 'ctrlpvim/ctrlp.vim'
 " Fuzzyfinder for grep within vim
 Plug 'dyng/ctrlsf.vim'
+" Best colorscheme
 Plug 'franbach/miramare'
 Plug 'hail2u/vim-css3-syntax'
 " Adds ES6 syntax support
@@ -66,6 +82,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'psliwka/vim-smoothie'
 " Better syntax highlighting for lots of languages
 Plug 'sheerun/vim-polyglot' 
+Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-python/python-syntax'

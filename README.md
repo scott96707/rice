@@ -1,3 +1,5 @@
+This repo is very old. The better way of doing things would be to switch to a more declarative OS, like Nix
+
 # MacOS setup
 
 Copy the dot files to your ~/ directory.

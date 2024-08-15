@@ -1,4 +1,5 @@
-This repo is very old. The better way of doing things would be to switch to a more declarative OS, like Nix
+This repo is very old. The better way of doing things would be to switch to a more declarative OS, like Nix. 
+See my [Nix repo](https://github.com/scott96707/nix)
 
 # MacOS setup
 
